@@ -1,6 +1,12 @@
 # MCC-Linux-ModManager
 A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 
+## Games supported
+- Halo: Reach (Done)
+- Halo: CE (In Progress)
+- Halo 2 (Done)
+- Halo 3 (Done)
+
 ## What can I do with it?
 The following operations are supported:
 - Adding/Removing .map files (for MP maps/Rebalanced Campaigns).
