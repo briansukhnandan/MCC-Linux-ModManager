@@ -41,4 +41,4 @@ For all flags, please use absolute paths to your directories!
 
 - Installing Ultimate Forge World for Halo: Reach:
 
-`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/$USER/Documents/sample_reach_mod/ -g haloreach -o add`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/$USER/Documents/ultimateforgeworld_reach_mod/ -g haloreach -o add`
