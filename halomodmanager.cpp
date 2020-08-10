@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     while((opt = getopt(argc, argv, ":p:f:g:o:")) != -1) {
 
         switch(opt) {
-
+            
             // Specifying MCC path.
             case 'p':
                 mcc_file_path = optarg;
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
             std::cout << "Mod files not found, please check the path and try again!" << std::endl;
             return 1;
         }
-        
+            
         // renameFiles() will return 1 if an error occurred, 0 otherwise.
         if (applyModFiles(def_maps_path, mod_path)) {
             std::cout << std::endl << "Something went wrong, one or more mod files conflict with MCC's current modded files." << std::endl;
@@ -118,6 +118,23 @@ int main(int argc, char* argv[]) {
         }
 
         else removeModFiles(def_maps_path);
+
+    }
+
+    if (user_choice == "backup") {
+
+        std::string maps_folder = "backups/"+game_selected+"/";
+        
+        if (!(PathExists(maps_folder))) {
+            std::string cpycmd = "mkdir -p "+maps_folder;
+            const int dir_err = system(cpycmd.c_str());
+
+            if (dir_err == -1) {
+                std::cout << "Error creating backup maps directory." << std::endl;
+                return 1;
+            }
+        
+        }
 
     }
 
