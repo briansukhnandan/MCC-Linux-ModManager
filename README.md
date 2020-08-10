@@ -9,7 +9,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 
 ## What can I do with it?
 The following operations are supported:
-- Adding/Removing .map files (for MP maps/Rebalanced Campaigns).
+- Adding/Removing .map files (for MP maps/Campaign).
 
 ## How do I use it?
 ```
