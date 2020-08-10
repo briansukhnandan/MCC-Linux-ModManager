@@ -22,7 +22,7 @@ For all flags, please use absolute paths to your directories!
 * -p is the path where Halo: MCC resides. For example, mine would be: `/home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
 * -f is the path to your mod's .map files. These can be located anywhere on the fs.
 * -g compiler flag args can either be `halo1`, `halo2`, `halo3`, or `haloreach`.
-* -o compiler flag args can be `add`, or `rm`.
+* -o compiler flag args can be `add` for adding .map files, or `rm` for removing .map files.
 
 ## Notes
 - PLEASE MAKE SURE THE MOD FOLDER ONLY CONTAINS `*.map` FILES!!!
