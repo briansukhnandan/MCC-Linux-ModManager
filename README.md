@@ -9,7 +9,7 @@ The following operations are supported:
 ```
 g++ -o halomodmanager halomodmanager.cpp -std=c++17
 
-./halomodmanager -p <PATH TO MCC> -f <PATH TO MOD .MAP FILES> -g <GAME SELECTED> -o <OPERATION>
+./halomodmanager -p <PATH_TO_MCC> -f <PATH_TO_MOD_.MAP_FILES> -g <GAME_SELECTED> -o <OPERATION>
 ```
 
 ## Notes
