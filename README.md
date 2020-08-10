@@ -25,6 +25,7 @@ For all flags, please use absolute paths to your directories!
 * -o compiler flag args can be `add`, or `rm`.
 
 ## Notes
+- PLEASE MAKE SURE THE MOD FOLDER CONTAINS ONLY .MAP FILES!!!
 - Adding .map files requires the -p, -f, -g, and -o flags to be set.
 - Restoring .map files/removing modded files requires the -p, -g, and -o flags to be set.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
