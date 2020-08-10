@@ -10,6 +10,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 ## What can I do with it?
 The following operations are supported:
 - Replacing .map files (for MP maps/Campaign).
+- Creating a backup of MCC .map files.
 
 ## How do I use it?
 ```
@@ -28,6 +29,7 @@ For all flags, please use absolute paths to your directories!
 - PLEASE MAKE SURE THE MOD FOLDER ONLY CONTAINS `*.map` FILES!!!
 - Adding .map files requires the -p, -f, -g, and -o flags to be set.
 - Restoring .map files/removing modded files requires the -p, -g, and -o flags to be set.
+- All backups will be stored in a 'backups/' directory which is created upon removing .map files and backup creations.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
 
 ## Examples
@@ -42,3 +44,7 @@ For all flags, please use absolute paths to your directories!
 - Installing Ultimate Forge World for Halo: Reach:
 
 `./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/$USER/Documents/ultimateforgeworld_reach_mod/ -g haloreach -o add`
+
+- Creating a backup of Halo 2 .map files:
+
+`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo2 -o backup`
