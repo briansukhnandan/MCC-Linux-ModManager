@@ -9,7 +9,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 
 ## What can I do with it?
 The following operations are supported:
-- Adding/Removing .map files (for MP maps/Campaign).
+- Replacing .map files (for MP maps/Campaign).
 
 ## How do I use it?
 ```
@@ -41,4 +41,4 @@ For all flags, please use absolute paths to your directories!
 
 - Installing Ultimate Forge World for Halo: Reach:
 
-`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_reach_mod/ -g haloreach -o add`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/$USER/Documents/ultimateforgeworld_reach_mod/ -g haloreach -o add`
