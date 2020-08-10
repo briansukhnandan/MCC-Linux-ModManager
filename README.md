@@ -19,7 +19,7 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 ./halomodmanager -p <PATH_TO_MCC> -f <PATH_TO_MOD_.MAP_FILES> -g <GAME_SELECTED> -o <OPERATION>
 ```
 
-For all flags, please use absolute paths to your directories!
+For all args, please use absolute paths to your directories!
 * -p is the path where Halo: MCC resides. For example, mine would be: `/home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
 * -f is the path to your mod's .map files. These can be located anywhere on the fs.
 * -g args can either be `halo1`, `halo2`, `halo3`, or `haloreach`.
@@ -32,7 +32,7 @@ For all flags, please use absolute paths to your directories!
 - PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
 - Adding .map files requires the `-p`, `-f`, `-g`, and `-o` args to be set.
 - Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` args to be set.
-- All backups will be stored in a 'backups/' directory which is created upon removing .map files and backup creations.
+- All backups will be stored in a `./backups/` directory which is created upon removing .map files and backup creations.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
 
 ## Examples
