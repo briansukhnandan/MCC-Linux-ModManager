@@ -35,4 +35,4 @@ For all flags, please use absolute paths to your directories!
 
 - Removing modded .map files from Halo 3 and restoring the originals.
 
-`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo3 -o add`
+`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo3 -o rm`
