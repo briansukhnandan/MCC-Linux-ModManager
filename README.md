@@ -21,7 +21,7 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 
 For all args, please use absolute paths to your directories!
 * -p is the path where Halo: MCC resides. For example, mine would be: `/home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
-* -f is the path to your mod's .map files. These can be located anywhere on the fs.
+* -f is the path to a folder containing your mod's .map files. These can be located anywhere on the fs. An example would be something like: `/home/$USER/Documents/sample_halo_mod/`.
 * -g args can either be `halo1`, `halo2`, `halo3`, or `haloreach`.
 * -o args can be: 
   * `add` for adding .map files.
@@ -38,7 +38,7 @@ For all args, please use absolute paths to your directories!
 ## Examples
 - Adding maps to Halo 3, given a folder named 'sample_halo3_mod' containing 3 *.map files (the same command would work for other Halo games, just change -g to halo2/haloreach and supply the appropriate mod path):
 
-`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_halo3_mod/ -g halo3 -o add`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/$USER/Documents/sample_halo3_mod/ -g halo3 -o add`
 
 - Removing modded .map files from Halo 3 and restoring the originals, while also backing up modded files to the backups/ directory (the same would work for any other Halo game by changing -g):
 
