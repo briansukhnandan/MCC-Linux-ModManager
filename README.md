@@ -18,7 +18,9 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 ./halomodmanager -p <PATH_TO_MCC> -f <PATH_TO_MOD_.MAP_FILES> -g <GAME_SELECTED> -o <OPERATION>
 ```
 
+For all flags, please use absolute paths to your directories!
 * -p is the path where Halo: MCC resides. For example, mine would be: `/home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
+* -f is the path to your mod's .map files. These can be located anywhere on the fs.
 * -g compiler flag args can either be `halo1`, `halo2`, `halo3`, or `haloreach`.
 * -o compiler flag args can be `add`, or `rm`.
 
@@ -27,6 +29,10 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 - Restoring .map files/removing modded files requires the -p, -g, and -o flags to be set.
 
 ## Examples
-- Adding maps to Halo 3, given a folder containing 3 *.map files:
+- Adding maps to Halo 3, given a folder named 'sample_halo3_mod' containing 3 *.map files:
 
 `./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_halo3_mod/ -g halo3 -o add`
+
+- Removing modded .map files from Halo 3 and restoring the originals.
+
+`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo3 -o add`
