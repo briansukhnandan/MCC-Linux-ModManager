@@ -128,11 +128,21 @@ int main(int argc, char* argv[]) {
         
         }
 
-        if (backup_maps(def_maps_path, backup_maps_folder)) {
-            std::cout << "An error has occurred while backing maps up from "+game_selected << std::endl;
-        }
+        // backup_maps() will return 1 if an error has occured.
+        // Check return status.
+        if (backup_maps(def_maps_path, backup_maps_folder)) std::cout << "An error has occurred while backing maps up from "+game_selected << std::endl;
+
+        else std::cout << "All .map files successfully copied over to "+backup_maps_folder << std::endl;
 
     }
+
+    // Creates a clean backup of all .map files.
+    if (user_choice == "restore") {
+        
+        
+
+    }
+
     return 0;
 }
 

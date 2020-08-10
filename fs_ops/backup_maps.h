@@ -27,8 +27,8 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
     } 
 
     // Go into Halo MCC maps folder (def_maps_path).
-    // Loop through directory and copy all .map files
-    // to (backup_maps_folder).
+    // Loop through directory and push all .map files
+    // to a vector.
     std::vector<std::string> dot_map_files;
 
     std::cout << std::endl;
@@ -53,11 +53,13 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
         }
         closedir(dir);
     }
+
     std::cout << std::endl;
     std::cout << "Press ENTER to continue..." << std::endl;
     std::cout << "------------------------------------------------" << std::endl;
     std::cin.ignore();
 
+    // Finally do the actual system call to copy the files over.
     for (size_t i = 0; i < dot_map_files.size(); i++) {
 
         std::string cpycmd = "cp \""+dot_map_files[i]+"\" "+backup_maps_folder;
@@ -73,9 +75,6 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
         }
 
     }
-
-    std::cout << "All .map files successfully copied over to "+backup_maps_folder << std::endl;
-
 
     return 0;
 }
