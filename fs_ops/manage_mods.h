@@ -174,7 +174,7 @@ int removeModFiles(std::string def_maps_path) {
         std::cin.ignore();
 
         // Prepare mv command for staged map.
-        std::string mv_cmd = "mv \""+staged_map+"\" backups/";
+        std::string mv_cmd = "mv \""+staged_map+"\" backups/modded_files/";
 
         // Move staged map to backups folder.
         system(mv_cmd.c_str());

@@ -3,14 +3,16 @@
 #include <stdio.h>
 
 #include "fs_ops/manage_mods.h"
+#include "fs_ops/backup_maps.h"
+
+std::string getMapsPath(std::string mcc_file_path, std::string game_selected); 
 
 /*
- * REQUIRES C++17
- * Example command usage:
- * ./halo_linux -p ~/Documents/dummy_maps_folder/ -f ./map_names.txt -g halo3
  *
- * My MCC Path: /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/
+ * REQUIRES C++17
  * 
+ * My MCC Path: /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/
+ *
  */
 
 int main(int argc, char* argv[]) {
@@ -42,12 +44,12 @@ int main(int argc, char* argv[]) {
                 }
                 break;
 
-            // Specifying game chosen.
+            // Specifying game chosen, can be "halo1", "halo2", "halo3", "haloreach".
             case 'g':
                 game_selected = optarg;
                 break;
 
-            // Specifying desired operation.
+            // Specifying desired operation, can be add, rm, or backup.
             case 'o':
                 user_choice = optarg;
                 break;
@@ -57,7 +59,86 @@ int main(int argc, char* argv[]) {
     }
 
     // Now set definitive maps path.
-    std::string def_maps_path;    
+    std::string def_maps_path = getMapsPath(mcc_file_path, game_selected);    
+
+    // Do initial check to make sure maps path can be found.
+    if (!(PathExists(def_maps_path))) {
+        std::cout << std::endl <<  "Maps path not found with the given parameters." << std::endl;
+        return 1;
+    }
+
+    // Applying .map files and making backups.
+    // Requires -p, -f, -g, and -o flags to be set with args.
+    if (user_choice == "add") {
+
+        // Check if path or files DNE, end program if any of these conditions are met.
+        if (!(PathExists(mod_path))) {
+            std::cout << "Mod files not found, please check the path and try again!" << std::endl;
+            return 1;
+        }
+            
+        // applyModFiles() will return 1 if an error occurred, 0 otherwise.
+        if (applyModFiles(def_maps_path, mod_path)) {
+            std::cout << std::endl << "Something went wrong, one or more mod files conflict with MCC's current modded files." << std::endl;
+        }
+
+        else std::cout << "Mods successfully loaded!" << std::endl;
+
+    }
+
+    // Removes .map files from Halo MCC directory and backs them up.
+    // Requires -p, -g, and -o flags to be set (-b flag optional).
+    if (user_choice == "rm") { 
+
+        // If specified backups directory and backups/ dir does not exist, create default one.
+        if (!(PathExists("backups/modded_files/"))) {
+            
+            std::cout << std::endl << "Creating default backup directory at 'backups/'" << std::endl;
+            const int dir_err = system("mkdir -p backups/modded_files/");
+
+            std::cout << "Please rerun halomodmanager." << std::endl << std::endl;
+            
+            if (dir_err == -1) {
+                std::cout << "Error creating backups directory." << std::endl;
+                return 1;
+            }
+
+        }
+
+        removeModFiles(def_maps_path);
+
+    }
+
+    // Creates a clean backup of all .map files.
+    if (user_choice == "backup") {
+
+        // backup_maps_folder will be in the form of:
+        // backups/halo3/
+        // backups/halo2/ 
+        std::string backup_maps_folder = "backups/"+game_selected+"_backup/";
+        
+        if (!(PathExists(backup_maps_folder))) {
+            std::string cpycmd = "mkdir -p "+backup_maps_folder;
+            const int dir_err = system(cpycmd.c_str());
+
+            if (dir_err == -1) {
+                std::cout << "Error creating backup maps directory." << std::endl;
+                return 1;
+            }
+        
+        }
+
+        if (backup_maps(def_maps_path, backup_maps_folder)) {
+            std::cout << "An error has occurred while backing maps up from "+game_selected << std::endl;
+        }
+
+    }
+    return 0;
+}
+
+std::string getMapsPath(std::string mcc_file_path, std::string game_selected) {
+
+    std::string def_maps_path;
 
     if (game_selected == "halo1") {
         //TODO
@@ -75,69 +156,6 @@ int main(int argc, char* argv[]) {
         def_maps_path = mcc_file_path+game_selected+"/maps/";
     }
 
-    if (!(PathExists(def_maps_path))) {
-        std::cout << std::endl <<  "Maps path not found with the given parameters." << std::endl;
-        return 1;
-    }
-
-    // Applying .map files and making backups.
-    // Requires -p, -f, -g, and -o flags to be set with args.
-    if (user_choice == "add") {
-
-        // Check if path or files DNE, end program if any of these conditions are met.
-        if (!(PathExists(mod_path))) {
-            std::cout << "Mod files not found, please check the path and try again!" << std::endl;
-            return 1;
-        }
-            
-        // renameFiles() will return 1 if an error occurred, 0 otherwise.
-        if (applyModFiles(def_maps_path, mod_path)) {
-            std::cout << std::endl << "Something went wrong, one or more mod files conflict with MCC's current modded files." << std::endl;
-        }
-
-        else std::cout << "Mods successfully loaded!" << std::endl;
-
-    }
-
-    // Removes .map files from Halo MCC directory and backs them up.
-    // Requires -p, -g, and -o flags to be set (-b flag optional).
-    if (user_choice == "rm") { 
-
-        // If specified backups directory and backups/ dir does not exist, create default one.
-        if (!(PathExists("backups/"))) {
-            
-            std::cout << std::endl << "Creating default backup directory at 'backups/'" << std::endl;
-            std::cout << "Please rerun halomodmanager." << std::endl << std::endl;
-            const int dir_err = system("mkdir -p backups");
-            
-            if (dir_err == -1) {
-                std::cout << "Error creating backups directory." << std::endl;
-                return 1;
-            }
-
-        }
-
-        else removeModFiles(def_maps_path);
-
-    }
-
-    if (user_choice == "backup") {
-
-        std::string maps_folder = "backups/"+game_selected+"/";
-        
-        if (!(PathExists(maps_folder))) {
-            std::string cpycmd = "mkdir -p "+maps_folder;
-            const int dir_err = system(cpycmd.c_str());
-
-            if (dir_err == -1) {
-                std::cout << "Error creating backup maps directory." << std::endl;
-                return 1;
-            }
-        
-        }
-
-    }
-
-    return 0;
+    return def_maps_path;
 
 }
