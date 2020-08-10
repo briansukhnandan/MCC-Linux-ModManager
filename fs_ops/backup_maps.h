@@ -18,7 +18,7 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
             std::string map_name(ent->d_name);
 
             if ((ent->d_name[0] != '.') && (map_name.substr(map_name.size()-4) == ".bak")) {
-                std::cout << "Please clear maps folder of all modded .map files with '-o rm' before backing up."  << std::endl;
+                std::cout << std::endl << "Please clear maps folder of all modded .map files with '-o rm' before backing up."  << std::endl << std::endl;
                 return 1;
             }
 
