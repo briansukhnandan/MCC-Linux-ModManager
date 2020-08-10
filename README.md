@@ -22,4 +22,5 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 
 ## Examples
 Adding maps to Halo 3, given a folder containing 3 *.map files:
+
 `./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_halo3_mod/ -g halo3 -o add`
