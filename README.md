@@ -30,8 +30,8 @@ For all flags, please use absolute paths to your directories!
 
 ## Notes
 - PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
-- Adding .map files requires the -p, -f, -g, and -o args to be set.
-- Restoring .map files/removing modded files requires the -p, -g, and -o args to be set.
+- Adding .map files requires the `-p`, `-f`, `-g`, and `-o` args to be set.
+- Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` args to be set.
 - All backups will be stored in a 'backups/' directory which is created upon removing .map files and backup creations.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
 
