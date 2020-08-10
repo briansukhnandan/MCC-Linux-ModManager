@@ -26,7 +26,7 @@ For all flags, please use absolute paths to your directories!
 * -o compiler flag args can be `add` for adding .map files, or `rm` for removing .map files.
 
 ## Notes
-- PLEASE MAKE SURE THE MOD FOLDER ONLY CONTAINS `*.map` FILES!!!
+- PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
 - Adding .map files requires the -p, -f, -g, and -o flags to be set.
 - Restoring .map files/removing modded files requires the -p, -g, and -o flags to be set.
 - All backups will be stored in a 'backups/' directory which is created upon removing .map files and backup creations.
