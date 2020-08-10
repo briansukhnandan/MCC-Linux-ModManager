@@ -19,7 +19,7 @@ g++ -o halomodmanager halomodmanager.cpp -std=c++17
 ```
 
 For all flags, please use absolute paths to your directories!
-* -p is the path where Halo: MCC resides. For example, mine would be: `/home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
+* -p is the path where Halo: MCC resides. For example, mine would be: `/home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/`
 * -f is the path to your mod's .map files. These can be located anywhere on the fs.
 * -g compiler flag args can either be `halo1`, `halo2`, `halo3`, or `haloreach`.
 * -o compiler flag args can be `add`, or `rm`.
@@ -33,12 +33,12 @@ For all flags, please use absolute paths to your directories!
 ## Examples
 - Adding maps to Halo 3, given a folder named 'sample_halo3_mod' containing 3 *.map files (the same command would work for other Halo games, just change -g to halo2/haloreach and supply the appropriate mod path):
 
-`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_halo3_mod/ -g halo3 -o add`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_halo3_mod/ -g halo3 -o add`
 
 - Removing modded .map files from Halo 3 and restoring the originals (Again, the same would work for any other Halo game by changing -g):
 
-`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo3 -o rm`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo3 -o rm`
 
 - Installing Ultimate Forge World for Halo: Reach:
 
-`./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_reach_mod/ -g haloreach -o add`
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -f /home/prophet/Documents/sample_reach_mod/ -g haloreach -o add`
