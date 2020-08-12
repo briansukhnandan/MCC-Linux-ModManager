@@ -4,6 +4,7 @@
 
 #include "fs_ops/manage_mods.h"
 #include "fs_ops/backup_maps.h"
+#include "fs_ops/restore_maps.h"
 
 std::string getMapsPath(std::string mcc_file_path, std::string game_selected); 
 
@@ -136,10 +137,25 @@ int main(int argc, char* argv[]) {
 
     }
 
-    // Creates a clean backup of all .map files.
+    // Restores .map files with a backup.
     if (user_choice == "restore") {
         
-        
+        std::string backup_maps_folder = "backups/"+game_selected+"_backup/";
+
+        if (!(PathExists(backup_maps_folder))) {
+            std::cout << "No backup exists at: '" << backup_maps_folder << std::string("'. Please ensure one exists first with '")+std::string("-g ")+game_selected+" -o backup'." << std::endl;
+        }
+
+        else {
+            if (restore_maps(def_maps_path, backup_maps_folder)) {
+                std::cout << "Error restoring files." << std::endl;
+            }
+            
+            else {
+                std::cout << std::endl << "Maps successfully restored." << std::endl;
+            }
+
+        }
 
     }
 
