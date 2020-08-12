@@ -1,5 +1,5 @@
 # MCC-Linux-ModManager
-A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
+A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.2
 
 ## Games supported
 - Halo: CE (In Progress)
