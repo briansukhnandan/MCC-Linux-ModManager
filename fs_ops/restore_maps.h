@@ -142,7 +142,6 @@ bool verifyAmtOfMaps(std::string game_selected, int maps_counter) {
 
     else if ((game_selected == "halo3") && (maps_counter != 38)) return false;
     
-
     else if ((game_selected == "haloreach") && (maps_counter != 44)) return false;
 
     return true;
