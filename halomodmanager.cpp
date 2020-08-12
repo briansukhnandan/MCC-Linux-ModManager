@@ -118,6 +118,7 @@ int main(int argc, char* argv[]) {
         // backups/halo2/ 
         std::string backup_maps_folder = "backups/"+game_selected+"_backup/";
         
+        // Check to see if backup folder exists already.
         if (!(PathExists(backup_maps_folder))) {
             std::string cpycmd = "mkdir -p "+backup_maps_folder;
             const int dir_err = system(cpycmd.c_str());
@@ -147,6 +148,7 @@ int main(int argc, char* argv[]) {
         }
 
         else {
+
             if (restore_maps(def_maps_path, backup_maps_folder)) {
                 std::cout << "Error restoring files." << std::endl;
             }
@@ -180,6 +182,10 @@ std::string getMapsPath(std::string mcc_file_path, std::string game_selected) {
 
     else if (game_selected == "haloreach") {
         def_maps_path = mcc_file_path+game_selected+"/maps/";
+    }
+
+    if (game_selected == "halo4") {
+        //TODO when Halo4 comes out.
     }
 
     return def_maps_path;

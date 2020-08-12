@@ -12,8 +12,28 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder) {
 
     // First check if backup_maps_dir is empty.
     if (!hasSubDir(backup_maps_folder)) {
-        std::cout << "Backup directory is empty." << std::endl;
+        std::cout << "Error. Backup directory is empty." << std::endl;
         return 1;
+    }
+
+    // Now verify that the backup created consists of only .map files
+    // This is to prevent injection of unwanted files.
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir(backup_maps_folder.c_str())) != NULL) {
+
+        while ((ent = readdir (dir)) != NULL) {
+
+            std::string map_name(ent->d_name);
+
+            // If we encounter a non-hidden file with an extension other than .map.
+            if ((ent->d_name[0] != '.') && (map_name.substr(map_name.size()-4) != ".map")) {
+                std::cout << std::endl << "Non .map files encountered in backups folder, please check contents of backup and try again." << std::endl << std::endl;
+                return 1;
+            }
+
+        }
+
     }
 
     // Prompt user to press ENTER before deleting files.
@@ -22,8 +42,6 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder) {
     std::cout << std::endl << "Press ENTER to continue." << std::endl;
     std::cin.ignore();
 
-    DIR *dir;
-    struct dirent *ent;
     // Then delete all .map files and .bak files from def_maps_path.
     if ((dir = opendir(def_maps_path.c_str())) != NULL) {
 
@@ -82,18 +100,18 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder) {
         }
         closedir(dir);
     }
-
     return 0;
 }
 
+// Checks if a directory is empty by checking two dir iterators are =.
 bool hasSubDir(std::string path) {
 
     if(!fs::is_directory(path)) return false;
 
-    fs::directory_iterator end_it;
-    fs::directory_iterator it(path);
+    fs::directory_iterator end_iter;
+    fs::directory_iterator iter(path);
 
-    if (it == end_it) return false;
+    if (iter == end_iter) return false;
 
     else return true;
 

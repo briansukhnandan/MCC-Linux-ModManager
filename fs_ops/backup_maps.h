@@ -2,15 +2,19 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
+bool hasSubDir(std::string path); 
 
 int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
     
     DIR *dir;
     struct dirent *ent;
     
-    // First off, check to make sure no backups already by looping through
+    // First off, check to make sure no .bak files exist already by looping through
     // dir and checking file extensions. If all is good, proceed below:
-
     if ((dir = opendir(def_maps_path.c_str())) != NULL) {
 
         while ((ent = readdir (dir)) != NULL) {
@@ -24,7 +28,14 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
 
         }
         closedir(dir);
-    } 
+    }
+
+    // Now check to ensure backups directory is empty before proceeding.
+    // If backup_maps_folder has sub folders or files, end instance.
+    if (hasSubDir(backup_maps_folder)) {
+        std::cout << std::endl << "Please make sure '" << backup_maps_folder << "' is empty before proceeding." << std::endl << std::endl;
+        return 1;
+    }
 
     // Go into Halo MCC maps folder (def_maps_path).
     // Loop through directory and push all .map files
