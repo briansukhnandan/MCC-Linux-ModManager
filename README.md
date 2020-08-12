@@ -54,3 +54,7 @@ For all args, please use absolute paths to your directories!
 - Creating a backup of Halo 2 .map files:
 
 `./halomodmanager -p /home/prophet/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g halo2 -o backup`
+
+- Restoring Halo: Reach .map files from a backup:
+
+`./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g haloreach -o restore`
