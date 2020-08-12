@@ -1,5 +1,5 @@
 # MCC-Linux-ModManager
-A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
+A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.2
 
 ## Games supported
 - Halo: CE (In Progress)
@@ -58,3 +58,6 @@ For all args, please use absolute paths to your directories!
 - Restoring Halo: Reach .map files from a backup:
 
 `./halomodmanager -p /home/$USER/.local/share/Steam/steamapps/common/Halo\ The\ Master\ Chief\ Collection/ -g haloreach -o restore`
+
+## Disclaimer
+This Mod Manager, like others is **not** EAC-compliant. Before using modded files of any kind, you must disable EAC. Playing with mods without doing this will probably cause your game to not boot, or worse you'll be banned from Halo: MCC and XBL. I am not responsible for anyone being banned because of this.
