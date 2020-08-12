@@ -6,6 +6,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 - Halo 2 (Done)
 - Halo 3 (Done)
 - Halo: Reach (Done)
+- Halo 4 (N/A)
 
 ## What can I do with it?
 The following operations are supported:
