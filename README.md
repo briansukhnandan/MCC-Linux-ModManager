@@ -12,6 +12,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 The following operations are supported:
 - Replacing .map files (for MP maps/Campaign).
 - Creating a backup of MCC .map files.
+- Restoring .map files from a backup.
 
 ## How do I use it?
 ```
@@ -28,6 +29,7 @@ For all args, please use absolute paths to your directories!
   * `add` for adding .map files.
   * `rm` for removing .map files.
   * `backup` for creating a backup of any Halo game supplied by `-g`.
+  * `restore` for restoring .map files of any Halo game supplied by `-g` to its original state, **after creating a backup**.
 
 ## Notes
 - PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
