@@ -12,6 +12,7 @@ A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.1
 The following operations are supported:
 - Replacing .map files (for MP maps/Campaign).
 - Creating a backup of MCC .map files.
+- Restoring .map files from a backup.
 
 ## How do I use it?
 ```
