@@ -41,7 +41,7 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std:
             }
 
         }
-
+        closedir(dir);
     }
 
     // Now verify that the amount of maps in there matches the amt that should
