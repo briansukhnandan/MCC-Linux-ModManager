@@ -10,10 +10,24 @@ bool hasSubDir(std::string path);
 
 int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
     
+    // Check to see if backup folder exists already.
+    // If not, create one.
+    if (!(PathExists(backup_maps_folder))) {
+
+        std::string cpycmd = "mkdir -p "+backup_maps_folder;
+        const int dir_err = system(cpycmd.c_str());
+
+        if (dir_err == -1) {
+            std::cout << "Error creating backup maps directory." << std::endl;
+            return 1;
+        }
+    
+    }
+
     DIR *dir;
     struct dirent *ent;
     
-    // First off, check to make sure no .bak files exist already by looping through
+    // First off, check to make sure no .bak files exist already in maps directory by looping through
     // dir and checking file extensions. If all is good, proceed below:
     if ((dir = opendir(def_maps_path.c_str())) != NULL) {
 

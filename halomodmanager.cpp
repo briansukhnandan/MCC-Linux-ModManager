@@ -117,19 +117,7 @@ int main(int argc, char* argv[]) {
         // backups/halo3/
         // backups/halo2/ 
         std::string backup_maps_folder = "backups/"+game_selected+"_backup/";
-        
-        // Check to see if backup folder exists already.
-        if (!(PathExists(backup_maps_folder))) {
-            std::string cpycmd = "mkdir -p "+backup_maps_folder;
-            const int dir_err = system(cpycmd.c_str());
-
-            if (dir_err == -1) {
-                std::cout << "Error creating backup maps directory." << std::endl;
-                return 1;
-            }
-        
-        }
-
+    
         // backup_maps() will return 1 if an error has occured.
         // Check return status.
         if (backup_maps(def_maps_path, backup_maps_folder)) std::cout << "An error has occurred while backing maps up from "+game_selected << std::endl;
@@ -149,7 +137,7 @@ int main(int argc, char* argv[]) {
 
         else {
 
-            if (restore_maps(def_maps_path, backup_maps_folder)) {
+            if (restore_maps(def_maps_path, backup_maps_folder, game_selected)) {
                 std::cout << "Error restoring files." << std::endl;
             }
             
