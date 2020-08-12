@@ -29,7 +29,7 @@ For all args, please use absolute paths to your directories!
   * `add` for adding .map files.
   * `rm` for removing .map files.
   * `backup` for creating a backup of any Halo game supplied by `-g`.
-  * `restore` for restoring .map files of any Halo game supplied by `-g` to its original state.
+  * `restore` for restoring .map files of any Halo game supplied by `-g` to its original state, **after creating a backup**.
 
 ## Notes
 - PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
