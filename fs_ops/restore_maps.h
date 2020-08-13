@@ -9,6 +9,16 @@ namespace fs = std::filesystem;
 bool hasSubDir(std::string path);
 bool verifyAmtOfMaps(std::string game_selected, int maps_counter);
 
+/*
+ *
+ * .restore_maps() - Purges all .map files from MCC maps directory and
+ *                   recopies over all files from backup_maps_folder into maps
+ *                   directory.
+ *
+ *                   Written by: Brian Sukhnandan 08/12/20 @briansukhnandan
+ *                    
+ */
+
 int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std::string game_selected) {
 
     // First check if backup_maps_dir is empty.
@@ -89,6 +99,7 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std:
     std::cin.ignore();
 
     // Now copy all files from backup dir to maps dir.
+    maps_counter = 0;
     if ((dir = opendir(backup_maps_folder.c_str())) != NULL) {
 
         while ((ent = readdir (dir)) != NULL) {
@@ -109,12 +120,25 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std:
                     return 1;
                 }
                 
+                maps_counter++;
 
             }
 
         }
         closedir(dir);
     }
+
+    // Last check, make sure # of maps copied over is correct.
+    // This block would only be hit if the backups folder was somehow
+    // modified after passing the initial file amount checks.
+
+    // If this is the case, the user tampered with the maps on purpose.
+    // Punish the user and just copy them anyways. Let them manually sort out the differences.
+    if (!verifyAmtOfMaps(game_selected, maps_counter)) {
+        std::cout << std::endl << "Not all necessary maps copied over. Please verify game files with Steam!" << std::endl;
+        return 1;
+    }
+
     return 0;
 }
 

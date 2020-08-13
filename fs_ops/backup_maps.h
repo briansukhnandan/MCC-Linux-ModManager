@@ -6,7 +6,17 @@
 
 namespace fs = std::filesystem;
 
-bool hasSubDir(std::string path); 
+bool hasSubDir(std::string path);
+
+/*
+ *
+ * .backup_maps() - Backs up vanilla .map files from Halo MCC maps dir. Everything
+ *                  copied from Halo MCC maps folder will be placed into backup_maps_folder.
+ *                  One will be created automatically.
+ *
+ *                  Written by: Brian Sukhnandan 08/11/20 @briansukhnandan
+ *                    
+ */
 
 int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
     
@@ -100,6 +110,5 @@ int backup_maps(std::string def_maps_path, std::string backup_maps_folder) {
         }
 
     }
-
     return 0;
 }
