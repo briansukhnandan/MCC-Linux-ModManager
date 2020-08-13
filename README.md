@@ -33,9 +33,9 @@ For all args, please use absolute paths to your directories!
 
 ## Notes
 - If you're using this program for the first time, you're going to want to make a backup of all your files (Halo: CE not supported yet). 
-  `./halomodmanager -p <PATH_TO_MCC> -g halo2 -o backup
-  `./halomodmanager -p <PATH_TO_MCC> -g halo3 -o backup
-  `./halomodmanager -p <PATH_TO_MCC> -g haloreach -o backup
+  `./halomodmanager -p <PATH_TO_MCC> -g halo2 -o backup`
+  `./halomodmanager -p <PATH_TO_MCC> -g halo3 -o backup`
+  `./halomodmanager -p <PATH_TO_MCC> -g haloreach -o backup`
 - PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
 - Adding .map files requires the `-p`, `-f`, `-g`, and `-o` args to be set.
 - Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` args to be set.
