@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
         }
             
         // applyModFiles() will return 1 if an error occurred, 0 otherwise.
-        if (applyModFiles(def_maps_path, mod_path)) {
+        if (applyModFiles(def_maps_path, mod_path, game_selected)) {
             std::cout << std::endl << "Something went wrong, one or more mod files conflict with MCC's current modded files." << std::endl;
         }
 
