@@ -10,31 +10,7 @@
 #include "valid_paths.h"
 #include "get_maps_strings.h"
 
-bool check_validity(std::string map_name, std::string game_selected, std::vector<std::string> halo3_maps) {
-
-    if (game_selected == "halo1") {
-        //TODO
-    }
-
-    else if (game_selected == "halo2") {
-        //TODO
-    }
-
-    else if (game_selected == "halo3") {
-        
-        // Loop through and see if map_name exists at all in halo3 maps.
-        for (size_t i = 0; i < halo3_maps.size(); i++) {
-            if (map_name == halo3_maps[i]) return true;
-        }
-
-    }
-
-    else if (game_selected == "haloreach") {
-        //TODO
-    }
-
-    return false;
-}
+// bool check_validity(std::string map_name, std::string game_selected, std::vector<std::string> halo1_maps, std::vector<std::string> halo2_maps, std::vector<std::string> halo3_maps, std::vector<std::string> haloreach_maps);
 
 /*
  *
@@ -62,7 +38,10 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
     std::vector<std::string> map_vector;
     std::vector<std::string> individual_maps;
 
+    std::vector halo1_maps = get_halo1_maps();
+    std::vector halo2_maps = get_halo2_maps();
     std::vector halo3_maps = get_halo3_maps();
+    std::vector haloreach_maps = get_haloreach_maps();
 
     // First check, loop through mod_path and make sure each .map
     // file is valid for the halo game going to be selected.
@@ -76,8 +55,9 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
 
             if ((ent->d_name[0] != '.') && (map_name.substr(map_name.size()-4) == ".map")) {
 
-                if (!check_validity(map_name, game_selected, halo3_maps)) {
+                if (!check_validity(map_name, game_selected, halo1_maps, halo2_maps, halo3_maps, haloreach_maps)) {
                     std::cout << "One or more .map files in the mod directory are not valid for "+game_selected+"." << std::endl;
+                    std::cout << "Perhaps a file in the mods directory is misspelled?" << std::endl;
                     return 1;
                 }
 

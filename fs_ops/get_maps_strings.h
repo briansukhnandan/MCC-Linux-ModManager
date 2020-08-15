@@ -1,6 +1,53 @@
 #include <vector>
 #include <string>
 
+std::vector<std::string> get_halo1_maps() {
+
+    std::vector<std::string> halo1_maps;
+
+    halo1_maps.push_back("a10.map");
+    halo1_maps.push_back("a30.map");
+    halo1_maps.push_back("a50.map");
+    halo1_maps.push_back("b30.map");
+    halo1_maps.push_back("b40.map");
+    halo1_maps.push_back("c10.map");
+    halo1_maps.push_back("c20.map");
+    halo1_maps.push_back("c40.map");
+    halo1_maps.push_back("d20.map");
+    halo1_maps.push_back("d40.map");
+    halo1_maps.push_back("ui.map");
+
+    return halo1_maps;
+
+}
+
+std::vector<std::string> get_halo2_maps() {
+
+    std::vector<std::string> halo2_maps;
+
+    halo2_maps.push_back("00a_introduction.map");
+    halo2_maps.push_back("01a_tutorial.map");
+    halo2_maps.push_back("01b_spacestation.map");
+    halo2_maps.push_back("03a_oldmombasa.map");
+    halo2_maps.push_back("03b_newmombasa.map");
+    halo2_maps.push_back("04a_gasgiant.map");
+    halo2_maps.push_back("04b_floodlab.map");
+    halo2_maps.push_back("05a_deltaapproach.map");
+    halo2_maps.push_back("05b_deltatowers.map");
+    halo2_maps.push_back("06a_sentinelwalls.map");
+    halo2_maps.push_back("06b_floodzone.map");
+    halo2_maps.push_back("07a_highcharity.map");
+    halo2_maps.push_back("07b_forerunnership.map");
+    halo2_maps.push_back("08a_deltacliffs.map");
+    halo2_maps.push_back("08b_deltacontrol.map");
+    halo2_maps.push_back("mainmenu.map");
+    halo2_maps.push_back("shared.map");
+    halo2_maps.push_back("single_player_shared.map");
+
+    return halo2_maps;
+
+}
+
 std::vector<std::string> get_halo3_maps() {
 
     std::vector<std::string> halo3_maps;
@@ -46,4 +93,98 @@ std::vector<std::string> get_halo3_maps() {
 
     return halo3_maps;
 
+}
+
+std::vector<std::string> get_haloreach_maps() {
+
+    std::vector<std::string> haloreach_maps;
+
+    haloreach_maps.push_back("20_sword_slayer.map");
+    haloreach_maps.push_back("30_settlement.map");
+    haloreach_maps.push_back("35_island.map");
+    haloreach_maps.push_back("45_aftship.map");
+    haloreach_maps.push_back("45_launch_station.map");
+    haloreach_maps.push_back("50_panopticon.map");
+    haloreach_maps.push_back("52_ivory_tower.map");
+    haloreach_maps.push_back("70_boneyard.map");
+    haloreach_maps.push_back("campaign.map");
+    haloreach_maps.push_back("cex_beaver_creek.map");
+    haloreach_maps.push_back("cex_damnation.map");
+    haloreach_maps.push_back("cex_ff_halo.map");
+    haloreach_maps.push_back("cex_hangemhigh.map");
+    haloreach_maps.push_back("cex_headlong.map");
+    haloreach_maps.push_back("cex_prisoner.map");
+    haloreach_maps.push_back("cex_timberland.map");
+    haloreach_maps.push_back("condemned.map");
+    haloreach_maps.push_back("dlc_invasion.map");
+    haloreach_maps.push_back("dlc_medium.map");
+    haloreach_maps.push_back("dlc_slayer.map");
+    haloreach_maps.push_back("ff_unearthed.map");
+    haloreach_maps.push_back("ff10_prototype.map");
+    haloreach_maps.push_back("ff20_courtyard.map");
+    haloreach_maps.push_back("ff30_waterfront.map");
+    haloreach_maps.push_back("ff45_corvette.map");
+    haloreach_maps.push_back("ff50_park.map");
+    haloreach_maps.push_back("ff60_airview.map");
+    haloreach_maps.push_back("ff60_icecave.map");
+    haloreach_maps.push_back("ff70_holdout.map");
+    haloreach_maps.push_back("forge_halo.map");
+    haloreach_maps.push_back("m05.map");
+    haloreach_maps.push_back("m10.map");
+    haloreach_maps.push_back("m20.map");
+    haloreach_maps.push_back("m30.map");
+    haloreach_maps.push_back("m35.map");
+    haloreach_maps.push_back("m45.map");
+    haloreach_maps.push_back("m50.map");
+    haloreach_maps.push_back("m52.map");
+    haloreach_maps.push_back("m60.map");
+    haloreach_maps.push_back("m70_a.map");
+    haloreach_maps.push_back("m70_bonus.map");
+    haloreach_maps.push_back("m70.map");
+    haloreach_maps.push_back("shared.map");
+    haloreach_maps.push_back("trainingpreserve.map");
+
+    return haloreach_maps;
+
+}
+
+bool check_validity(std::string map_name, std::string game_selected, std::vector<std::string> halo1_maps, std::vector<std::string> halo2_maps, std::vector<std::string> halo3_maps, std::vector<std::string> haloreach_maps) {
+
+    if (game_selected == "halo1") {
+
+        // Loop through and see if map_name exists at all in halo2 maps.
+        for (size_t i = 0; i < halo1_maps.size(); i++) {
+            if (map_name == halo1_maps[i]) return true;
+        }
+        
+    }
+
+    else if (game_selected == "halo2") {
+
+        // Loop through and see if map_name exists at all in halo2 maps.
+        for (size_t i = 0; i < halo2_maps.size(); i++) {
+            if (map_name == halo2_maps[i]) return true;
+        }
+
+    }
+
+    else if (game_selected == "halo3") {
+        
+        // Loop through and see if map_name exists at all in halo3 maps.
+        for (size_t i = 0; i < halo3_maps.size(); i++) {
+            if (map_name == halo3_maps[i]) return true;
+        }
+
+    }
+
+    else if (game_selected == "haloreach") {
+        
+        // Loop through and see if map_name exists at all in haloreach maps.
+        for (size_t i = 0; i < haloreach_maps.size(); i++) {
+            if (map_name == haloreach_maps[i]) return true;
+        }
+
+    }
+
+    return false;
 }

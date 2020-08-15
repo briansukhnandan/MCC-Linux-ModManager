@@ -21,6 +21,11 @@ bool verifyAmtOfMaps(std::string game_selected, int maps_counter);
 
 int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std::string game_selected) {
 
+    std::vector halo1_maps = get_halo1_maps();
+    std::vector halo2_maps = get_halo2_maps();
+    std::vector halo3_maps = get_halo3_maps();
+    std::vector haloreach_maps = get_haloreach_maps();
+    
     // First check if backup_maps_dir is empty.
     if (!hasSubDir(backup_maps_folder)) {
         std::cout << "Error. Backup directory is empty." << std::endl;
@@ -29,6 +34,7 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std:
 
     // Now verify that the backup created consists of only .map files
     // This is to prevent injection of unwanted files.
+    // We also check if the map name is appropriate for the correct halo game.
     DIR *dir;
     struct dirent *ent;
     int maps_counter = 0;
@@ -41,7 +47,15 @@ int restore_maps(std::string def_maps_path, std::string backup_maps_folder, std:
             // Anytime we encounter a .map file increment maps_counter.
             // At the end of this while loop maps_counter should = amt of .map files in halo dir.
             if ((ent->d_name[0] != '.') && (map_name.substr(map_name.size()-4) == ".map")) {
+                
                 maps_counter++;
+
+                if (!check_validity(map_name, game_selected, halo1_maps, halo2_maps, halo3_maps, haloreach_maps)) {
+                    std::cout << "One or more .map files in the backups directory are not valid for "+game_selected+"." << std::endl;
+                    std::cout << "Maybe a file is misspelled?" << std::endl;
+                    return 1;
+                }
+
             }
 
             // If we encounter a non-hidden file with an extension other than .map.
@@ -158,9 +172,7 @@ bool hasSubDir(std::string path) {
 
 bool verifyAmtOfMaps(std::string game_selected, int maps_counter) {
 
-    if ( (game_selected == "halo1") ) {
-        //TODO
-    }
+    if ( (game_selected == "halo1") && (maps_counter != 11) ) return false;
 
     else if ((game_selected == "halo2") && (maps_counter != 18)) return false;
 
