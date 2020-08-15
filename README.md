@@ -2,7 +2,7 @@
 A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.3
 
 ## Games supported
-- Halo: CE (In Progress)
+- Halo: CE (Done)
 - Halo 2 (Done)
 - Halo 3 (Done)
 - Halo: Reach (Done)
@@ -32,7 +32,9 @@ For all args, please use absolute paths to your directories!
   * `restore` for restoring .map files of any Halo game supplied by `-g` to its original state, **after creating a backup**.
 
 ## Notes
-- If you're using this program for the first time, you're going to want to make a backup of all your files (Halo: CE not supported yet).
+- If you're using this program for the first time, you're going to want to make a backup of all your files.
+
+  `./halomodmanager -p <PATH_TO_MCC> -g halo1 -o backup`
 
   `./halomodmanager -p <PATH_TO_MCC> -g halo2 -o backup`
   
