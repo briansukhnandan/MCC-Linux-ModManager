@@ -19,10 +19,12 @@ std::string getMapsPath(std::string mcc_file_path, std::string game_selected);
 int main(int argc, char* argv[]) {
 
     int opt;
+    bool map_not_necessary = false;
     std::string user_choice;
     std::string mcc_file_path;
     std::string mod_path;
     std::string game_selected;
+    std::string def_maps_path;
 
     // Process arguments for paths and selected game.
     while((opt = getopt(argc, argv, ":p:f:g:o:")) != -1) {
@@ -57,15 +59,26 @@ int main(int argc, char* argv[]) {
                 
         }
 
+    }    
+
+    // If user wants to go to pegasus mode or other mode that doesnt require map modificaitons,
+    // set bool to true.
+    if (user_choice == "pegasus") {
+        map_not_necessary = true;
     }
 
-    // Now set definitive maps path.
-    std::string def_maps_path = getMapsPath(mcc_file_path, game_selected);    
+    // If map modifications are necessary given the parameters however.
+    if (!map_not_necessary) {
 
-    // Do initial check to make sure maps path can be found.
-    if (!(PathExists(def_maps_path))) {
-        std::cout << std::endl <<  "Maps path not found with the given parameters." << std::endl;
-        return 1;
+        // Now set definitive maps path.
+        def_maps_path = getMapsPath(mcc_file_path, game_selected);
+
+        // Do initial check to make sure maps path can be found.
+        if (!(PathExists(def_maps_path))) {
+            std::cout << std::endl <<  "Maps path not found with the given parameters." << std::endl;
+            return 1;
+        }
+
     }
 
     // Applying .map files and making backups.
@@ -149,15 +162,39 @@ int main(int argc, char* argv[]) {
 
     }
 
+    if (user_choice == "pegasus") {
+
+        // If Pegasus mode is disabled, which is indicated by pegasus file DNE.
+        if (!FileExists(mcc_file_path+"pegasus")) {
+            // Create file named 'pegasus' in MCC dir.
+            std::string createCmd = "touch \""+mcc_file_path+"pegasus\"";
+            system(createCmd.c_str());
+
+            std::cout << std::endl << "Pegasus mode enabled." << std::endl;
+        }
+
+        // If Pegasus mode is enabled disable it.
+        else {
+
+            std::string deleteCmd = "rm \""+mcc_file_path+"pegasus\"";
+            system(deleteCmd.c_str());
+
+            std::cout << std::endl << "Pegasus mode disabled." << std::endl;
+
+        }
+
+    }
+
     return 0;
 }
 
+// Sets map path for each individual halo game based on -g argument.
 std::string getMapsPath(std::string mcc_file_path, std::string game_selected) {
 
     std::string def_maps_path;
 
     if (game_selected == "halo1") {
-        //TODO
+        def_maps_path = mcc_file_path+game_selected+"/original/build/maps/";
     }
 
     else if (game_selected == "halo2") {

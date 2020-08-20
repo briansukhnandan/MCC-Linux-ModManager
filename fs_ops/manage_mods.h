@@ -10,8 +10,6 @@
 #include "valid_paths.h"
 #include "get_maps_strings.h"
 
-// bool check_validity(std::string map_name, std::string game_selected, std::vector<std::string> halo1_maps, std::vector<std::string> halo2_maps, std::vector<std::string> halo3_maps, std::vector<std::string> haloreach_maps);
-
 /*
  *
  * .applyModFiles() - Moves .map files from mod_path to def_maps_path. In the process of

@@ -170,6 +170,7 @@ bool hasSubDir(std::string path) {
 
 }
 
+// Checks if correct number of files are going to be transferred over.
 bool verifyAmtOfMaps(std::string game_selected, int maps_counter) {
 
     if ( (game_selected == "halo1") && (maps_counter != 11) ) return false;
@@ -182,4 +183,3 @@ bool verifyAmtOfMaps(std::string game_selected, int maps_counter) {
 
     return true;
 }
-
