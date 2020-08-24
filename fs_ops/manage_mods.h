@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <ctime>
 #include <map>
 
 #include <dirent.h>
@@ -143,13 +144,16 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
  *                    
  */
 
-int removeModFiles(std::string def_maps_path) {
+int removeModFiles(std::string def_maps_path, std::string game_selected) {
 
     DIR *dir;
     struct dirent *ent;
     std::string user_choice = "99";
     size_t map_counter = 1;
     std::map<int, std::string> map_order;
+
+    // Get current UNIX timestamp.
+    std::time_t current_time = std::time(nullptr);
 
     // Open Halo MCC maps directory, and run a search for all files
     // ending with .map.bak, which contain the original maps for restoration.
@@ -181,6 +185,7 @@ int removeModFiles(std::string def_maps_path) {
             closedir(dir);
         }
         std::cout << std::endl << "Please enter any backup files listed above to restore them (or 0 if finished)." << std::endl;
+        std::cout << "Files will be moved to ./backups/modded_files/"+game_selected+"_"+std::to_string(current_time)+"/" << std::endl;
         std::cout << std::endl << "For example if I wanted to restore Guardian, I would type 'guardian.map.bak' if it's listed." << std::endl;
         std::cout << ">";
         std::cin >> user_choice;
@@ -204,8 +209,22 @@ int removeModFiles(std::string def_maps_path) {
         std::cout << std::endl << "Press ENTER to continue..." << std::endl;
         std::cin.ignore();
 
+        // Create backup dir with unix timestamp.
+        if (!(PathExists("backups/modded_files/"+game_selected+"_"+std::to_string(current_time)+"/"))) {
+            
+            std::string mkdir_cmd = "mkdir -p backups/modded_files/"+game_selected+"_"+std::to_string(current_time)+"/";
+
+            const int dir_err = system(mkdir_cmd.c_str());
+            
+            if (dir_err == -1) {
+                std::cout << "Error creating backups directory with timestamp." << std::endl;
+                return 1;
+            }
+
+        }
+
         // Prepare mv command for staged map.
-        std::string mv_cmd = "mv \""+staged_map+"\" backups/modded_files/";
+        std::string mv_cmd = "mv \""+staged_map+"\" backups/modded_files/"+game_selected+"_"+std::to_string(current_time)+"/";
 
         // Move staged map to backups folder.
         system(mv_cmd.c_str());

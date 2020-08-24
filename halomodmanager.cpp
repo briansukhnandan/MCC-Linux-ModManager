@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
             std::cout << std::endl << "Creating default backup directory at 'backups/'" << std::endl;
             const int dir_err = system("mkdir -p backups/modded_files/");
 
-            std::cout << "Please rerun halomodmanager." << std::endl << std::endl;
+            // std::cout << "Please rerun halomodmanager." << std::endl << std::endl;
             
             if (dir_err == -1) {
                 std::cout << "Error creating backups directory." << std::endl;
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 
         }
 
-        removeModFiles(def_maps_path);
+        removeModFiles(def_maps_path, game_selected);
 
     }
 

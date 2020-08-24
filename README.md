@@ -1,5 +1,5 @@
 # MCC-Linux-ModManager
-A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.4
+A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.4.1
 
 ## Games supported
 - Halo: CE (Done)
@@ -49,6 +49,7 @@ For all parameters, please use absolute paths to your directories!
 - Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` parameters to be set.
 - All backups will be stored in a `./backups/` directory which is created upon removing .map files and backup creations.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
+- Custom tag support is not available because of Halo Assembly not having a native Linux release or workaround. Hopefully soon we can see this being implemented.
 
 ## Examples
 - Adding maps to Halo 3, given a folder named 'sample_halo3_mod' containing 3 *.map files (the same command would work for other Halo games, just change -g to halo2/haloreach and supply the appropriate mod path):
@@ -77,3 +78,7 @@ For all parameters, please use absolute paths to your directories!
 
 ## Disclaimer
 This Mod Manager, like others is **not** EAC-compliant. Before using modded files of any kind, you must disable EAC. Playing with mods without doing this will probably cause your game to not boot, or worse you'll be banned from Halo: MCC and XBL. I am not responsible for anyone being banned because of this.
+
+## TODO
+- Custom Menu screen support
+- Backup timestamps (Done)
