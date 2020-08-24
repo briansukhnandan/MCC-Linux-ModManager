@@ -49,6 +49,7 @@ For all parameters, please use absolute paths to your directories!
 - Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` parameters to be set.
 - All backups will be stored in a `./backups/` directory which is created upon removing .map files and backup creations.
 - When adding .map files, make sure the name(s) of those files matches the ones in MCC's maps directory before replacement. You can find the names of these files on Halo Assembly (if you have access to a Windows machine) or in the Halo Modding discord.
+- Modded files that are removed will be moved to `./backups/modded_files/` with a UNIX timestamp equating to when those files were removed from MCC.
 - Custom tag support is not available because of Halo Assembly not having a native Linux release or workaround. Hopefully soon we can see this being implemented.
 
 ## Examples
