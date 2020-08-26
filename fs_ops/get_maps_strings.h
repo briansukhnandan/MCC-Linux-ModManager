@@ -2,7 +2,7 @@
 #include <string>
 #include <algorithm>
 
-bool in_array(const std::string &value, const std::vector<std::string> &list);
+bool in_vector(const std::string &value, const std::vector<std::string> &list);
 
 std::vector<std::string> get_halo1_maps() {
 
@@ -153,18 +153,18 @@ std::vector<std::string> get_haloreach_maps() {
 
 bool check_validity(std::string map_name, std::string game_selected, std::vector<std::string> halo1_maps, std::vector<std::string> halo2_maps, std::vector<std::string> halo3_maps, std::vector<std::string> haloreach_maps) {
 
-    if ( (game_selected == "halo1") && (in_array(map_name, halo1_maps)) ) return true;
+    if ( (game_selected == "halo1") && (in_vector(map_name, halo1_maps)) ) return true;
 
-    else if ( (game_selected == "halo2") && (in_array(map_name, halo2_maps)) ) return true;
+    else if ( (game_selected == "halo2") && (in_vector(map_name, halo2_maps)) ) return true;
 
-    else if ((game_selected == "halo3") && (in_array(map_name, halo3_maps)) ) return true;
+    else if ((game_selected == "halo3") && (in_vector(map_name, halo3_maps)) ) return true;
 
-    else if ( (game_selected == "haloreach") && (in_array(map_name, haloreach_maps)) ) return true;
+    else if ( (game_selected == "haloreach") && (in_vector(map_name, haloreach_maps)) ) return true;
 
     return false;
 }
 
-bool in_array(const std::string &value, const std::vector<std::string> &list) {
+bool in_vector(const std::string &value, const std::vector<std::string> &list) {
 
     return std::find(list.begin(), list.end(), value) != list.end();
 

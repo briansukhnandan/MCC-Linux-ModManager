@@ -80,5 +80,5 @@ For all parameters, please use absolute paths to your directories!
 This Mod Manager, like others is **not** EAC-compliant. Before using modded files of any kind, you must disable EAC. Playing with mods without doing this will probably cause your game to not boot, or worse you'll be banned from Halo: MCC and XBL. I am not responsible for anyone being banned because of this.
 
 ## TODO
-- Custom Menu screen support
+- Custom Menu screen support.
 - Support for game variants.

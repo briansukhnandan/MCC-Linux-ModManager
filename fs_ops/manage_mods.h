@@ -10,6 +10,7 @@
 
 #include "valid_paths.h"
 #include "get_maps_strings.h"
+#include "manage_game_variants.h"
 
 /*
  *
@@ -129,6 +130,11 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
 
         dst << src.rdbuf();
 
+    }
+
+    int game_variant_error = add_Game_Variants(def_maps_path, mod_path, game_selected);
+    if (game_variant_error) {
+        std::cout << std::endl << "Error occured adding game variants." << std::endl;
     }
 
     return 0;
