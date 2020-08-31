@@ -81,4 +81,4 @@ This Mod Manager, like others is **not** EAC-compliant. Before using modded file
 
 ## TODO
 - Custom Menu screen support.
-- Support for game variants.
+- Support for game variants. (Done)
