@@ -14,6 +14,7 @@ The following operations are supported:
 - Creating a backup of MCC .map files.
 - Restoring .map files from a backup.
 - Enabling/Disabling Pegasus Mode (A similar version to the Chinese port of MCC).
+- Adding game variants to any Halo Game.
 
 ## How do I use it?
 ```
