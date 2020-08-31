@@ -22,7 +22,7 @@
  *                    
  */
 
-int applyModFiles(std::string def_maps_path, std::string mod_path, std::string game_selected) {
+int applyModFiles(std::string mcc_file_path, std::string def_maps_path, std::string mod_path, std::string game_selected) {
 
     // Print paths about to be modified.
     std::cout << std::endl << "All paths successfully found, here is what's going to be modified -" << std::endl << std:: endl;
@@ -75,9 +75,11 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
         std::cout << "------------------------------------------------" << std::endl;
         while ((ent = readdir (dir)) != NULL) {
 
+            std::string map_name(ent->d_name);
+
             // If directories start with ., they are hidden folders which will be ignored.
             // This block below means we have encountered a normal *.map file.
-            if (ent->d_name[0] != '.') {
+            if ( (ent->d_name[0] != '.') && (map_name != "game_variants") && (map_name != "map_variants") ) {
 
                 // Firstly, check if any .bak files exist for maps that are also contained
                 // within mod folder.
@@ -90,6 +92,7 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
                 std::cout << def_maps_path+(ent->d_name) << std::endl;
                 map_vector.push_back(def_maps_path+(ent->d_name));
                 individual_maps.push_back(ent->d_name); 
+
             }
 
         }
@@ -132,7 +135,7 @@ int applyModFiles(std::string def_maps_path, std::string mod_path, std::string g
 
     }
 
-    int game_variant_error = add_Game_Variants(def_maps_path, mod_path, game_selected);
+    int game_variant_error = add_Game_Variants(mcc_file_path, def_maps_path, mod_path, game_selected);
     if (game_variant_error) {
         std::cout << std::endl << "Error occured adding game variants." << std::endl;
     }
