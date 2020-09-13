@@ -1,5 +1,5 @@
 # MCC-Linux-ModManager
-A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.4.1
+A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.4.2
 
 ## Games supported
 - Halo: CE (Done)
@@ -14,6 +14,7 @@ The following operations are supported:
 - Creating a backup of MCC .map files.
 - Restoring .map files from a backup.
 - Enabling/Disabling Pegasus Mode (A similar version to the Chinese port of MCC).
+- Adding game variants to any Halo Game.
 
 ## How do I use it?
 ```
@@ -81,6 +82,5 @@ For all parameters, please use absolute paths to your directories!
 This Mod Manager, like others is **not** EAC-compliant. Before using modded files of any kind, you must disable EAC. Playing with mods without doing this will probably cause your game to not boot, or worse you'll be banned from Halo: MCC and XBL. I am not responsible for anyone being banned because of this.
 
 ## TODO
-- Custom Menu screen support
-- Support for game variants.
-- Backup timestamps (Done)
+- Custom Menu screen support.
+- Support for game variants. (Done)
