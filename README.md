@@ -45,7 +45,7 @@ For all parameters, please use absolute paths to your directories!
   
   `./halomodmanager -p <PATH_TO_MCC> -g haloreach -o backup`
   
-- PLEASE MAKE SURE THE MOD FOLDER (supplied by -f) ONLY CONTAINS `*.map` FILES!!!
+- The mod folder (supplied by -f) should only contain `*.map` files, a `game_variants/` directory, and a `map_variants/` directory!!!
 - Adding .map files requires the `-p`, `-f`, `-g`, and `-o` parameters to be set.
 - Restoring .map files/removing modded files requires the `-p`, `-g`, and `-o` parameters to be set.
 - All backups will be stored in a `./backups/` directory which is created upon removing .map files and backup creations.
