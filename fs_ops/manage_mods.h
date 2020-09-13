@@ -135,7 +135,7 @@ int applyModFiles(std::string mcc_file_path, std::string def_maps_path, std::str
 
     }
 
-    int game_variant_error = add_Game_Variants(mcc_file_path, def_maps_path, mod_path, game_selected);
+    int game_variant_error = add_Game_and_Map_Variants(mcc_file_path, def_maps_path, mod_path, game_selected);
     if (game_variant_error) {
         std::cout << std::endl << "Error occured adding game variants." << std::endl;
     }
