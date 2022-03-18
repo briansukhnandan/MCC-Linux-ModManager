@@ -12,9 +12,7 @@ bool FileExists(const std::string& s) {
         return true;
     }
     
-    else {
-        return false;
-    }
+    return false;
 }
 
 /* 
