@@ -64,8 +64,9 @@ function toggle_pegasus_mode {
 # Also backs up mod files to $BACKUP_DIR
 function apply_mod_files {
   ASSOCIATED_MAPS=($(get_maps_array))
-  MOD_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/"
-  for file in $files/map_variants/*;
+  MAPS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/maps/"
+  printf "Adding maps to MCC for $game\n\n"
+  for file in $files/maps/*;
   do
     # Makes sure files in mod are valid for the specified game.
     # And makes sure there isn't a currently modded file (.map will have an associated .bak) that should be replaced.
@@ -76,12 +77,27 @@ function apply_mod_files {
       cp -f $file $(get_maps_path)
       
       # Copy over valid mod files into MCC-Backups.
-      mkdir -p $MOD_BACKUP_FOLDER
-      cp -f $file $MOD_BACKUP_FOLDER
-
+      mkdir -p $MAPS_BACKUP_FOLDER
+      cp -f $file $MAPS_BACKUP_FOLDER
     else
       echo "$game maps doesn't contain the specified map or a .bak file already exists for: $(basename $file). Skipping..."
     fi
+  done
+
+  GAME_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/game_variants/"
+  printf "Adding game variants to MCC for $game\n\n"
+  for file in $files/game_variants/*.bin;
+  do
+    # TODO
+    echo "$path/$game/game_variants"
+  done
+
+  MAP_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/map_variants/"
+  printf "Adding map variants to MCC for $game\n\n"
+  for file in $files/map_variants/*;
+  do
+    # TODO
+    echo "$path/$game/map_variants"
   done
 }
 
@@ -105,10 +121,8 @@ function backup_maps {
     printf "Copying files from $(get_maps_path) to $BACKUP_DIR/$game...\n\n"
     cp $(get_maps_path)* $BACKUP_DIR/$game
     echo "Backup complete!"
-
   else
     echo "The directory $(get_maps_path) doesn't exist! Please verify your game files through Steam."
-
   fi
 }
 
@@ -127,37 +141,24 @@ function restore_maps_from_backup {
       cp -rf $BACKUP_DIR/$game/* $(get_maps_path)
       printf "\nRestore complete!\n"
     fi
-
   else
     echo "A backup for $game doesn't exist!"
-
   fi
 }
 
 ##############
 # Operations #
 ##############
-if [[ $operation == "add" ]]
-then 
+if [[ $operation == "add" ]] then 
   apply_mod_files
-
-elif [[ $operation == "rm" ]]
-then
+elif [[ $operation == "rm" ]] then
   remove_mod_files
-
-elif [[ $operation == "backup" ]]
-then
+elif [[ $operation == "backup" ]] then
   backup_maps
-
-elif [[ $operation == "restore" ]]
-then
+elif [[ $operation == "restore" ]] then
   restore_maps_from_backup
-
-elif [[ $operation == "pegasus" ]]
-then
+elif [[ $operation == "pegasus" ]] then
   toggle_pegasus_mode
-
 else
   echo "Operation not valid!"
-
 fi
