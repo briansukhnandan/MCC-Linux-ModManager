@@ -10,8 +10,7 @@ haloreachmaps=("20_sword_slayer.map" "30_settlement.map" "35_island.map" "45_aft
 #####################
 # Process arguments #
 #####################
-while getopts p:f:g:o: flag
-do
+while getopts p:f:g:o: flag do
   case "${flag}" in
     # Remove trailing / from dir path and mod files path.
     p) path=$(echo ${OPTARG} | sed 's:/*$::');;
@@ -104,8 +103,8 @@ function apply_mod_files {
       cp $file $path/$game/map_variants
 
       # Lastly map variants if any.
-      mkdir -p $GAME_VARIANTS_BACKUP_FOLDER
-      cp -f $file $GAME_VARIANTS_BACKUP_FOLDER
+      mkdir -p $MAP_VARIANTS_BACKUP_FOLDER
+      cp -f $file $MAP_VARIANTS_BACKUP_FOLDER
     done
   fi
 }
