@@ -1,8 +1,7 @@
 #!/bin/sh
-
-# Globals
 BACKUP_DIR=/home/prophet/Documents/MCC-Backups
 
+# Globals
 halo1maps=("a10.map" "a30.map" "a50.map" "b30.map" "b40.map" "c10.map" "c20.map" "c40.map" "d20.map" "d40.map" "ui.map")
 halo2maps=("00a_introduction.map" "01a_tutorial.map" "01b_spacestation.map" "03a_oldmombasa.map" "03b_newmombasa.map" "04a_gasgiant.map" "04b_floodlab.map", "05a_deltaapproach.map" "05b_deltatowers.map" "06a_sentinelwalls.map" "06b_floodzone.map" "07a_highcharity.map" "07b_forerunnership.map" "08a_deltacliffs.map" "08b_deltacontrol.map" "mainmenu.map" "shared.map" "single_player_shared.map")
 halo3maps=("005_intro.map" "010_jungle.map" "020_base.map" "030_outskirts.map" "040_voi.map" "050_floodvoi.map" "070_waste.map" "100_citadel.map" "110_hc.map" "120_halo.map" "130_epilogue.map" "armory.map" "bunkerworld.map" "campaign.map" "chill.map" "chillout.map" "construct.map" "cyberdyne.map" "deadlock.map" "descent.map" "docks.map" "fortress.map" "ghosttown.map" "guardian.map" "isolation.map" "lockout.map" "mainmenu.map" "midship.map" "riverworld.map" "salvation.map" "sandbox.map" "shared.map" "shrine.map" "sidewinder.map" "snowbound.map" "spacecamp.map" "warehouse.map" "zanzibar.map")
@@ -52,61 +51,70 @@ function get_maps_array {
 # Similarities to the Chinese port of Halo: MCC.
 function toggle_pegasus_mode {
   echo "Toggling Pegasus mode"
-  if [ -f $path/pegasus ]
-  then
+  if [ -f $path/pegasus ] then
     rm "$path/pegasus"
   else
     touch "$path/pegasus"
   fi
 }
 
-# Adds map_variants/ files from mod -> MCC path.
-# Also backs up mod files to $BACKUP_DIR
+# Adds map_variants/ files from mod -> MCC path. Also backs up mod files to $BACKUP_DIR
 function apply_mod_files {
   ASSOCIATED_MAPS=($(get_maps_array))
-  MAPS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/maps/"
-  printf "Adding maps to MCC for $game\n\n"
-  for file in $files/maps/*;
-  do
-    # Makes sure files in mod are valid for the specified game.
-    # And makes sure there isn't a currently modded file (.map will have an associated .bak) that should be replaced.
-    if [[ ("${ASSOCIATED_MAPS[@]}" =~ "$(basename $file)") && ! -f $(get_maps_path)$(basename $file).bak ]]
-    then
-      echo "Adding $(basename $file) to $game"
-      mv $(get_maps_path)$(basename $file) $(get_maps_path)$(basename $file).bak
-      cp -f $file $(get_maps_path)
-      
-      # Copy over valid mod files into MCC-Backups.
-      mkdir -p $MAPS_BACKUP_FOLDER
-      cp -f $file $MAPS_BACKUP_FOLDER
-    else
-      echo "$game maps doesn't contain the specified map or a .bak file already exists for: $(basename $file). Skipping..."
-    fi
-  done
+  CURRENT_TIESTAMP=$(date +%s)
+  MAPS_BACKUP_FOLDER="$BACKUP_DIR/mods/$CURRENT_TIMESTAMP/maps/"
+  if [[ -d $files/maps ]] then
+    printf "Adding maps to MCC for $game\n\n"
+    for file in $files/maps/*; do
+      # Makes sure files in mod are valid for the specified game.
+      # And makes sure there isn't a currently modded file (.map will have an associated .bak) that should be replaced.
+      if [[ ("${ASSOCIATED_MAPS[@]}" =~ "$(basename $file)") && ! -f $(get_maps_path)$(basename $file).bak ]] then
+        echo "Adding $(basename $file) to $game"
+        mv $(get_maps_path)$(basename $file) $(get_maps_path)$(basename $file).bak
+        cp -f $file $(get_maps_path)
+        
+        # Copy over valid mod files into MCC-Backups.
+        mkdir -p $MAPS_BACKUP_FOLDER
+        cp -f $file $MAPS_BACKUP_FOLDER
+      else
+        echo "$game maps doesn't contain the specified map or a .bak file already exists for: $(basename $file). Skipping..."
+      fi
+    done
+  fi
 
-  GAME_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/game_variants/"
-  printf "Adding game variants to MCC for $game\n\n"
-  for file in $files/game_variants/*.bin;
-  do
-    # TODO
-    echo "$path/$game/game_variants"
-  done
+  GAME_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$CURRENT_TIMESTAMP/game_variants/"
+  if [[ -d $files/game_variants ]] then
+    printf "\nAdding game variants to MCC for $game\n\n"
+    for file in $files/game_variants/*.bin; do
+      echo "$path/$game/game_variants"
+      cp -f $file $path/$game/game_variants
 
-  MAP_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$(date +%s)/map_variants/"
-  printf "Adding map variants to MCC for $game\n\n"
-  for file in $files/map_variants/*;
-  do
-    # TODO
-    echo "$path/$game/map_variants"
-  done
+      # Copy game variants over.
+      mkdir -p $GAME_VARIANTS_BACKUP_FOLDER
+      cp -f $file $GAME_VARIANTS_BACKUP_FOLDER
+    done
+  fi
+
+  # Halo CE & 2 don't accept map_variants.
+  MAP_VARIANTS_BACKUP_FOLDER="$BACKUP_DIR/mods/$CURRENT_TIMESTAMP/map_variants/"
+  if [[ -d $files/map_variants && { $game != "halo1" || $game != "halo2" } ]] then
+    printf "\nAdding map variants to MCC for $game\n\n"
+    for file in $files/map_variants/*; do
+      echo "$path/$game/map_variants"
+      cp $file $path/$game/map_variants
+
+      # Lastly map variants if any.
+      mkdir -p $GAME_VARIANTS_BACKUP_FOLDER
+      cp -f $file $GAME_VARIANTS_BACKUP_FOLDER
+    done
+  fi
 }
 
 # Checks if any .bak files exist in MCC maps and removes the corresponding file
 # without .bak and renames the .bak to the original file name.
 function remove_mod_files {
   echo "Removing .bak files"
-  for file in $(get_maps_path)*.bak;
-  do
+  for file in $(get_maps_path)*.bak; do
     FILE_NAME_WITHOUT_BAK=$(echo "$file" | sed 's/.\{4\}$//')
     mv -f $file $FILE_NAME_WITHOUT_BAK
   done
@@ -114,8 +122,7 @@ function remove_mod_files {
 
 # Copies all contents from associated maps directory to the backup directory.
 function backup_maps {
-  if [ -d "$(get_maps_path)" ]
-  then
+  if [ -d "$(get_maps_path)" ] then
     echo "Creating backup directory if not exists..."
     mkdir -p $BACKUP_DIR/$game
     printf "Copying files from $(get_maps_path) to $BACKUP_DIR/$game...\n\n"
@@ -128,14 +135,12 @@ function backup_maps {
 
 # Should only be called if a backup for the specified game exists.
 function restore_maps_from_backup {
-  if [ -d $BACKUP_DIR/$game ]
-  then
-    # Warn the user about this if they want to take manual intervention.
+  if [ -d $BACKUP_DIR/$game ] then
+    # Warn the user about this in case they want to take manual intervention.
     echo "Restoring .map files from $BACKUP_DIR/$game/ to $(get_maps_path)"
     echo "WARNING: This will nuke the current contents of the $game maps folder and replace it with the backup."
     read -p "Continue? (y/n)" -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
+    if [[ $REPLY =~ ^[Yy]$ ]] then
       # Probably want to force overwrite if there exists a file with the same file name already.
       # The "add" operation will back up all mods each time so no harm in doing this.
       cp -rf $BACKUP_DIR/$game/* $(get_maps_path)
