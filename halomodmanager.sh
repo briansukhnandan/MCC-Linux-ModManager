@@ -104,8 +104,8 @@ function apply_mod_files {
       cp $file $path/$game/map_variants
 
       # Lastly map variants if any.
-      mkdir -p $GAME_VARIANTS_BACKUP_FOLDER
-      cp -f $file $GAME_VARIANTS_BACKUP_FOLDER
+      mkdir -p $MAP_VARIANTS_BACKUP_FOLDER
+      cp -f $file $MAP_VARIANTS_BACKUP_FOLDER
     done
   fi
 }
