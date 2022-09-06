@@ -1,8 +1,5 @@
 # MCC-Linux-ModManager
-A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.5
-
-- To get the most stable release, clone the `master` branch.
-- To get the latest patches or to contribute, clone the `dev` branch.
+A Mod Manager CLI for Halo: The Master Chief Collection on Linux. v0.6
 
 ## Games supported
 - Halo: CE (Done)
@@ -21,8 +18,7 @@ The following operations are supported:
 
 ## How do I use it?
 ```
-g++ -o halomodmanager halomodmanager.cpp -std=c++17
-
+chmod +x halomodmanager.sh
 ./halomodmanager -p <PATH_TO_MCC> -f <PATH_TO_MOD_.MAP_FILES> -g <GAME_SELECTED> -o <OPERATION>
 ```
 
